@@ -39,7 +39,8 @@
 
                                 var vm = {
                                     orderId: item.id,
-                                    orderNumber: item.id
+                                    orderNumber: item.id,
+                                    orderItemsCount: item.itemsCount
                                 };
 
                                 ordersViewModelDictionary.keys.push(vm.orderId);
