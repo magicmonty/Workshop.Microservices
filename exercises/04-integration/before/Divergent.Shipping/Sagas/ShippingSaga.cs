@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Divergent.Finance.Messages.Events;
+using Divergent.ITOps.Messages.Commands;
 using Divergent.Sales.Messages.Events;
 using NServiceBus;
 using NServiceBus.Logging;
@@ -46,6 +47,13 @@ namespace Divergent.Shipping.Sagas
         {
             if (Data.IsOrderSubmitted && Data.IsPaymentProcessed)
             {
+                await context.Send<ShipWithFedexCommand>(cmd =>
+                {
+                    cmd.CustomerId = Data.CustomerId;
+                    cmd.OrderId = Data.CustomerId;
+                    cmd.Products = Data.Products.Select(p => p.Identifier).ToList();
+                });
+
                 MarkAsComplete();
             }
         }

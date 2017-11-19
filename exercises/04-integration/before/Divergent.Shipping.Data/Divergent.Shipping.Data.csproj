@@ -45,9 +45,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ITOps\ShippingInfoProvider.cs" />
     <Compile Include="VolumeEstimator.cs" />
     <Compile Include="WeightCalculator.cs" />
-    <Folder Include="ITOps\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

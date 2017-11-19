@@ -7,6 +7,7 @@ using System.IO;
 using NServiceBus.Persistence;
 using System.Configuration;
 using Divergent.Finance.Messages.Events;
+using Divergent.ITOps.Messages.Commands;
 using Divergent.Sales.Messages.Events;
 
 namespace Divergent.Shipping.Config
@@ -42,6 +43,7 @@ namespace Divergent.Shipping.Config
 
             routing.RegisterPublisher(typeof(PaymentSucceededEvent), "Divergent.Finance");
             routing.RegisterPublisher(typeof(OrderSubmittedEvent), "Divergent.Sales");
+            routing.RouteToEndpoint(typeof(ShipWithFedexCommand), "Divergent.ITOps");
 
             endpointConfiguration.UsePersistence<NHibernatePersistence>()
                 .ConnectionString(ConfigurationManager.ConnectionStrings["Divergent.Shipping"].ToString());
