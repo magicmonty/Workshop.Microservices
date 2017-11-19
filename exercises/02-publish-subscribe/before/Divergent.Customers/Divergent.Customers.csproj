@@ -106,6 +106,7 @@
   <ItemGroup>
     <Compile Include="Config\ContainerSetup.cs" />
     <Compile Include="Config\EndpointConfig.cs" />
+    <Compile Include="Handlers\OrderSubmittedHandler.cs" />
     <None Include="App.config" />
     <None Include="nservicebus.host.exe.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -113,7 +114,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Handlers\" />
     <Folder Include="Sagas\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

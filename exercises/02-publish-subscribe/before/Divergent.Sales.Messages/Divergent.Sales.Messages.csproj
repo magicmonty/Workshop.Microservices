@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\SubmitOrderCommand.cs" />
-    <Folder Include="Events\" />
+    <Compile Include="Events\OrderSubmittedEvent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

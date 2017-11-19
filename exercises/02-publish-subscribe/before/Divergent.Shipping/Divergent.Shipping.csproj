@@ -102,15 +102,15 @@
   <ItemGroup>
     <Compile Include="Config\ContainerSetup.cs" />
     <Compile Include="Config\EndpointConfig.cs" />
+    <Compile Include="Handlers\OrderSubmittedHandler.cs" />
+    <Compile Include="Handlers\PaymentSucceededHandler.cs" />
     <None Include="App.config" />
     <None Include="nservicebus.host.exe.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <StartAction>Program</StartAction>

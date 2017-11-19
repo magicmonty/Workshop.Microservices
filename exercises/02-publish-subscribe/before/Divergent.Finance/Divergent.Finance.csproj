@@ -114,6 +114,8 @@
   <ItemGroup>
     <Compile Include="Config\ContainerSetup.cs" />
     <Compile Include="Config\EndpointConfig.cs" />
+    <Compile Include="Handlers\InitiatePaymentProcessCommandHandler.cs" />
+    <Compile Include="Handlers\OrderSubmittedHandler.cs" />
     <Compile Include="Messages\Commands\InitiatePaymentProcessCommand.cs" />
     <Compile Include="PaymentClient\ReliablePaymentClient.cs" />
     <None Include="App.config" />
@@ -123,7 +125,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Handlers\" />
     <Folder Include="Sagas\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

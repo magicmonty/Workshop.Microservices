@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Divergent.Sales.Data.Context;
 using Divergent.Sales.Data.Models;
 using Divergent.Sales.Messages.Commands;
+using Divergent.Sales.Messages.Events;
 using NServiceBus;
 using NServiceBus.Logging;
 
@@ -39,6 +40,13 @@ namespace Divergent.Sales.Handlers
 
                 _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
+
+                await context.Publish<OrderSubmittedEvent>(e =>
+                {
+                    e.OrderId = order.Id;
+                    e.CustomerId = message.CustomerId;
+                    e.Products = message.Products;
+                });
             }
         }
     }

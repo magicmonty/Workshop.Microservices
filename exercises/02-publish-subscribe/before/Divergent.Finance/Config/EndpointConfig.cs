@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.IO;
+using Divergent.Sales.Messages.Events;
 using NServiceBus;
 using NServiceBus.Logging;
 using NServiceBus.Persistence;
@@ -38,6 +39,8 @@ namespace Divergent.Finance.Config
                 .ConnectionString("deadLetter=false;journal=false")
                 .Routing();
 
+            routing.RegisterPublisher(typeof(OrderSubmittedEvent), "Divergent.Sales");
+
             endpointConfiguration.UsePersistence<NHibernatePersistence>()
                 .ConnectionString(ConfigurationManager.ConnectionStrings["Divergent.Finance"].ToString());
 
@@ -45,8 +48,14 @@ namespace Divergent.Finance.Config
             endpointConfiguration.AuditProcessedMessagesTo("audit");
 
             var conventions = endpointConfiguration.Conventions();
-            conventions.DefiningCommandsAs(t => t.Namespace != null && t.Namespace.StartsWith("Divergent") && t.Namespace.EndsWith("Commands") && t.Name.EndsWith("Command"));
-            conventions.DefiningEventsAs(t => t.Namespace != null && t.Namespace.StartsWith("Divergent") && t.Namespace.EndsWith("Events") && t.Name.EndsWith("Event"));
+            conventions.DefiningCommandsAs(t => t.Namespace != null 
+                                                && t.Namespace.StartsWith("Divergent") 
+                                                && t.Namespace.EndsWith("Commands") 
+                                                && t.Name.EndsWith("Command"));
+            conventions.DefiningEventsAs(t => t.Namespace != null 
+                                              && t.Namespace.StartsWith("Divergent") 
+                                              && t.Namespace.EndsWith("Events") 
+                                              && t.Name.EndsWith("Event"));
 
             endpointConfiguration.EnableInstallers();
         }

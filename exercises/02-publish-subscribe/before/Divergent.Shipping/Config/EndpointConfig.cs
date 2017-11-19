@@ -6,6 +6,8 @@ using LogManager = Common.Logging.LogManager;
 using System.IO;
 using NServiceBus.Persistence;
 using System.Configuration;
+using Divergent.Finance.Messages.Events;
+using Divergent.Sales.Messages.Events;
 
 namespace Divergent.Shipping.Config
 {
@@ -37,6 +39,9 @@ namespace Divergent.Shipping.Config
             var routing = endpointConfiguration.UseTransport<MsmqTransport>()
                 .ConnectionString("deadLetter=false;journal=false")
                 .Routing();
+
+            routing.RegisterPublisher(typeof(OrderSubmittedEvent), "Divergent.Sales");
+            routing.RegisterPublisher(typeof(PaymentSucceededEvent), "Divergent.Finance");
 
             endpointConfiguration.UsePersistence<NHibernatePersistence>()
                 .ConnectionString(ConfigurationManager.ConnectionStrings["Divergent.Shipping"].ToString());
